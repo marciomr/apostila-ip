@@ -1,0 +1,129 @@
+\chapter{Introdução}
+\label{cha:introducao}
+
+Este curso que hoje chamamos de ``Introdução à Programação'' originalmente era chamado de ``Introdução à Ciência da Computação''.
+Imagino que a mudança teve a intenção de deixar mais claro que o que se espera dos estudantes ao final do curso é que eles tenham ``aprendido a programar'', como se diz de maneira informal, ou ao menos tenham sido iniciado nessa arte.
+Quando ofereci esta disciplina pela primeira vez, porém, julguei útil tentar reter um pouco da ideia original do curso, a saber, introduzir alguns dos conceitos com os quais vocês, estudantes ingressantes do curso de Sistemas de Informação, irão se deparar ao longo do curso.
+Pretendo manter esse espírito sem prejuízo, porém, de cobrir todo conteúdo que se espera de um curso de Introdução à Programação.
+
+Aprender a programar se assemelha um pouco ao processo de aprender uma nova língua.
+Cabe ao professor passar parte do novo léxico e os conceitos da nova gramática, mas essa aproximação conceitual ao objeto de estudos de nada adianta sem o exercício prático da fala, da escuta e da escrita.
+Por esse motivo, e porque a experiência mostrou a eficácia do modelo, optamos por intercalar neste curso aulas conceituais e aulas práticas no laboratório.
+O enfoque desta apostila é na parte conceitual do curso, mas incluímos no final de quase todo capítulo sugestões de exercícios práticos.
+Os exercícios, portanto, não são opcionais e exigem dedicação dos estudantes, bem como o acompanhamento atento do docente e seu(s) monitore(s).
+
+Comecemos nossa apostila, então, tratando do conceito fundamental: {\em computação}.
+A maneira clássica de apresentar a história da computação, divide-a em duas trajetórias progressivas e relativamente independentes \cite{}.
+Acreditamos que essa apresentação é simplista, mas serve bem aos propósitos desta introdução.
+
+A primeira trajetória centra sua atenção no artefato, o {\em computador}.
+Ela começa com a invenção do ábaco em tempos imemoráveis e passa por uma série de tentativas de construir o que hoje chamaríamos de máquinas de calcular, passa pelas máquinas Hollerith até chegar no EDVAC, no ENIAC, no Colossus, nos microcomputadores e assim por diante.
+A segunda, a que nos interessa, centra sua atenção no conceito, a {\em computação}.
+Essa história começa com ideias de filósofos como Leibniz que no século XVII imaginou que o limite do método analítico de raciocínio era sua automatização.
+Essa ideia atravessou os séculos e teve seu período áureo no começo do século XX quando uma série de pesquisadores brilhantes se debruçaram sobre o problema de formalizar toda a matemática.
+Esse esforço eventualmente esbarrou no seguinte problema: seria possível automatizar o processo de construção de provas matemáticas?
+O personagem principal da nossa história, o matemático inglês Allan Turing, entendeu que isso não era sempre possível.
+Para mostrar isso, porém, ele precisou definir de maneira convincente o que significa um procedimento ser automatizável.
+
+Outros matemáticos daquela época -- notavelmente Alonzo Church, Kurt Gödel e Emilie Post -- haviam proposto modelos alternativos que não foram suficientemente convincentes.
+Uma das novidade do modelo de Turing, hoje conhecido como ``Máquinas de Turing'', era a possibilidade de se construir uma ``Máquina Universal''.
+Ou seja, uma máquina capaz de reproduzir o comportamento de qualquer outra Máquina de Turing.
+
+Toda esta história será contada com muito mais detalhes no curso de {\em Introdução à Teoria da Computação}.
+Talvez o resultado principal do curso será mostrar, como Turing o fez nos anos 30, que existem problemas matemáticos que não podem ser resolvidos de maneira automática.
+Para os propósitos destas notas, porém, o que queremos reter é algo mais simples:
+
+\begin{quote}
+  Um {\em computador} é uma máquina programável capaz de resolver qualquer problema que seja resolvível de maneira automática.
+\end{quote}
+
+Ou seja, um computador não se confunde com uma máquina de calcular ou com as máquinas Hollerith que era construídas com um propósito específico.
+Um computador pode ser programado para fazer qualquer coisa, ou melhor, qualquer coisa que seja possível automatizar.
+
+Podemos agora dizer com todas as letras que o objetivo desta disciplina é introduzir os estudantes à arte de programar essas máquinas chamadas computadores.
+Para tanto precisaremos aprender uma {\em linguagem de programação} que no nosso caso será a última versão do Java.
+Antes de começarmos a falar de linguagens, porém, convém dar um passo atrás e entender o que exatamente queremos programar.
+Para tanto será útil um outro conceito central para o curso: {\em algoritmo}.
+
+
+\begin{quote}
+  Um {\em algoritmo} é uma sequência de instruções inequívocas a serem executadas em passos discreto -- ou seja, um de cada vez.
+  Em geral um algoritmo pode partir de um valor inicial que será chamado de {\em entrada} e sua execução pode eventualmente parar e devolver um valor chamado de {\em saída}.
+\end{quote}
+
+Algoritmos serão o objeto de estudos no curso de {\em Introdução à Análise de Algoritmos}.
+Por ora, nos interessa apenas concretizar a ideia com alguns exemplos.
+
+\begin{example}{Algoritmo de Euclides}
+  \label{ex:euclides}
+  {\bf Entrada:} Dois inteiros $a$ e $b$ tais que $a \geq b$
+  {\bf Saída:} O maior divisor comum entre $a$ e $b$
+
+  \begin{enumerate}
+  \item Calcule o resto $r$ da divisão de $a$ por $b$
+  \item Chame $b$ de $a$ e $r$ de $b$
+  \item Se $b \neq 0$ volte para o passo 1
+  \item Se $b = 0$ para e devolva $a$
+  \end{enumerate}
+
+  {\bf Simulação:}
+  \begin{itemize}
+  \item $a = 42$, $b = 24$ e $r = 18$
+  \item $a = 24$, $b = 18$ e $r = 6$
+  \item $a = 18$, $b = 6$ e $r = 0$
+  \item $a = 6$, $b = 0$ e devolve $6$
+  \end{itemize}
+\end{example}
+
+O Exemplo \ref{ex:euclides} mostra um procedimento para determinar o máximo divisor comum entre dois números inteiros conhecido como {\em Algoritmo de Euclides}.
+Esse algoritmo está descrito no livro {\em Elementos} escrito por Euclides por volta do ano 300 a.c.
+Não é trivial verificar que ele é {\em correto}, ou seja, que para quaisquer duas entradas $a$ e $b$ satisfazendo a condição $a \geq b$ a saída será o máximo divisor comum entre $a$ e $b$.
+Uma técnica para demonstrar que um algoritmo é correto será apresentada no curso de {\em Introdução à Análise de Algoritmos}.
+Nos interessa, por enquanto, apenas a definição:
+
+\begin{quote}
+  Um algoritmo é {\em correto} se para toda entrada válida ele devolve a saída esperada.
+\end{quote}
+
+Note que a definição que demos de algoritmo não exige que ele necessariamente pare em algum momento.
+De fato, podemos pensar exemplos de algoritmos que satisfazem nossa definição, mas que é difícil de mostrar se ele chega a um fim para todas as entradas.
+Considere o seguinte exemplo:
+
+\begin{example}{Algoritmo $3N+1$}
+  \label{ex:euclides}
+  {\bf Entrada:} Um número natural $N$
+
+  \begin{enumerate}
+  \item Se $N$ é para coloque $frac{N}{2}$ em $N$ e repita
+  \item Se $N$ é ímpar e $N \neq 1$ coloque $3N+1$ em $N$ e volte para o passo 1
+  \item Se $N = 1$ pare
+  \end{enumerate}
+
+  {\bf Simulação:}
+  \begin{itemize}
+  \item $N = 42$
+  \item $N = 24$
+  \item $N = 64$
+  \item $N = 32$
+  \item $N = 16$
+  \item $N = 8$
+  \item $N = 4$
+  \item $N = 2$
+  \item $N = 1$
+  \end{itemize}
+\end{example}
+
+Até o presente momento não conhecemos uma demonstração matemática de que o algoritmo $3N+1$ termina para todas as entradas ou se existe alguma entrada para o qual ele nunca termina -- neste segundo caso dizemos que a simulação entra em {\em looping infinito}.
+Como já chamamos a atenção, porém, nossa definição de algoritmo não depende disso.
+
+% arquitetura de Von Neumann - arquitetura
+
+Uma {\em linguagem de programação} materializa um algoritmo em um programa.
+Ou inversamente, um {\em algoritmo} abstrai a linguagem de um programa.
+
+
+% linguagem: léxico, sintaxe e semântica
+
+% compilador - compiladores
+
+% exemplos: C, python e Java

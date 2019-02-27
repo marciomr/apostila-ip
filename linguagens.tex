@@ -1,8 +1,9 @@
 \chapter{Introdução}
 \label{cha:introducao}
 
-Este curso que hoje chamamos de ``Introdução à Programação'' originalmente era chamado de ``Introdução à Ciência da Computação''.
-Imagino que a mudança teve a intenção de deixar mais claro que o que se espera dos estudantes ao final do curso é que eles tenham ``aprendido a programar'', como se diz de maneira informal, ou ao menos tenham sido iniciado nessa arte.
+Para efeitos didáticos, podemos dividir as disciplinas do curso de Sistemas de Informação em três ou quatro núcleos: 1) as matérias de matemática, 2) as matérias de gestão e 3) as matérias de ciência da computação que podemos subdividir em matérias teóricas e matérias de sistemas.
+Originalmente esta disciplina que hoje chamamos de ``Introdução à Programação'' era chamada de ``Introdução à Ciência da Computação'' e tinha como objetivo introduzir os ingressantes aos temas que seriam tratados no núcleo 3.
+Imagino que a mudança de nome teve a intenção de deixar mais claro que o que se espera dos estudantes ao final do curso é que eles tenham ``aprendido a programar'', como se diz de maneira informal, ou ao menos tenham sido iniciado nessa arte.
 Quando ofereci esta disciplina pela primeira vez, porém, julguei útil tentar reter um pouco da ideia original do curso, a saber, introduzir alguns dos conceitos com os quais vocês, estudantes ingressantes do curso de Sistemas de Informação, irão se deparar ao longo do curso.
 Pretendo manter esse espírito sem prejuízo, porém, de cobrir todo conteúdo que se espera de um curso de Introdução à Programação.
 
@@ -40,11 +41,27 @@ Para os propósitos destas notas, porém, o que queremos reter é algo mais simp
 Ou seja, um computador não se confunde com uma máquina de calcular ou com as máquinas Hollerith que era construídas com um propósito específico.
 Um computador pode ser programado para fazer qualquer coisa, ou melhor, qualquer coisa que seja possível automatizar.
 
+Portanto, conceitualmente um computador é uma máquina programável universal.
+Essa ideia de Turing se realiza em máquina concreta por meio de uma arquitetura.
+No curso de {\em Arquitetura de Computadores} vocês estudarão esse tema a fundo.
+Aqui vamos apresentar apenas as ideias principais da chamada {\em arquitetura de Von Neumann}.
+
+A característica marcante dessa arquitetura é a separação entre uma unidade de processamento (CPU) -- que contém uma unidade de controle, uma unidade lógica e registradores -- e uma unidade de memória (Figura \ref{fig:von-neumann}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=.5\textwidth]{imagens/von-neumann.jpg}
+  \caption{Arquitetura de Von Neumann}
+  \label{fig:von-neumann}
+\end{figure}
+
+A CPU é uma máquina universal capaz de executar programas armazenados na unidade de memória.
+
 Podemos agora dizer com todas as letras que o objetivo desta disciplina é introduzir os estudantes à arte de programar essas máquinas chamadas computadores.
-Para tanto precisaremos aprender uma {\em linguagem de programação} que no nosso caso será a última versão do Java.
+Para tanto precisaremos aprender uma {\em linguagem de programação}.
+
 Antes de começarmos a falar de linguagens, porém, convém dar um passo atrás e entender o que exatamente queremos programar.
 Para tanto será útil um outro conceito central para o curso: {\em algoritmo}.
-
 
 \begin{quote}
   Um {\em algoritmo} é uma sequência de instruções inequívocas a serem executadas em passos discreto -- ou seja, um de cada vez.
@@ -56,9 +73,10 @@ Por ora, nos interessa apenas concretizar a ideia com alguns exemplos.
 
 \begin{example}{Algoritmo de Euclides}
   \label{ex:euclides}
-  {\bf Entrada:} Dois inteiros $a$ e $b$ tais que $a \geq b$
-  {\bf Saída:} O maior divisor comum entre $a$ e $b$
 
+  \noindent
+  {\bf Entrada:} Dois inteiros $a$ e $b$ tais que $a \geq b$\\
+  {\bf Saída:} O maior divisor comum entre $a$ e $b$
   \begin{enumerate}
   \item Calcule o resto $r$ da divisão de $a$ por $b$
   \item Chame $b$ de $a$ e $r$ de $b$
@@ -66,6 +84,7 @@ Por ora, nos interessa apenas concretizar a ideia com alguns exemplos.
   \item Se $b = 0$ para e devolva $a$
   \end{enumerate}
 
+  \noindent
   {\bf Simulação:}
   \begin{itemize}
   \item $a = 42$, $b = 24$ e $r = 18$
@@ -91,14 +110,16 @@ Considere o seguinte exemplo:
 
 \begin{example}{Algoritmo $3N+1$}
   \label{ex:euclides}
-  {\bf Entrada:} Um número natural $N$
 
+  \noindent
+  {\bf Entrada:} Um número natural $N$
   \begin{enumerate}
-  \item Se $N$ é para coloque $frac{N}{2}$ em $N$ e repita
+  \item Se $N$ é para coloque $\frac{N}{2}$ em $N$ e repita
   \item Se $N$ é ímpar e $N \neq 1$ coloque $3N+1$ em $N$ e volte para o passo 1
   \item Se $N = 1$ pare
   \end{enumerate}
 
+  \noindent
   {\bf Simulação:}
   \begin{itemize}
   \item $N = 42$
@@ -113,13 +134,116 @@ Considere o seguinte exemplo:
   \end{itemize}
 \end{example}
 
-Até o presente momento não conhecemos uma demonstração matemática de que o algoritmo $3N+1$ termina para todas as entradas ou se existe alguma entrada para o qual ele nunca termina -- neste segundo caso dizemos que a simulação entra em {\em looping infinito}.
+Até o presente momento não conhecemos uma demonstração matemática de que o algoritmo $3N+1$ termina para todas as entradas ou se existe alguma entrada para o qual ele nunca termina -- neste segundo caso dizemos que a simulação entra em {\em loop infinito}.
 Como já chamamos a atenção, porém, nossa definição de algoritmo não depende disso.
-
-% arquitetura de Von Neumann - arquitetura
 
 Uma {\em linguagem de programação} materializa um algoritmo em um programa.
 Ou inversamente, um {\em algoritmo} abstrai a linguagem de um programa.
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm,auto,>=latex]
+\node (algo) {Algoritmo};
+\node (prog) at (5,0) {Programa};
+\node (exec) at (10,0) {Excecução};
+\draw[->] (algo) -> node[above]{linguagem} (prog);
+\draw[->] (prog) -> node[above]{entrada} (exec);
+\end{tikzpicture}
+\end{center}
+
+Como qualquer linguagem, uma linguagem de programação possui:
+\begin{itemize}
+\item um conjunto de palavras reservadas ({\em léxico}), 
+\item um conjunto de regras que definem a estrutura de sentenças a partir do léxico ({\em gramática} ou {\em sintaxe}) e
+\item um conjunto de instruções que determinam como devem ser interpretadas as sentenças ({\em semântica}).
+\end{itemize}
+
+Considere como exemplo o seguinte pequeno trecho de um código escrito na linguagem Java:
+
+\begin{lstlisting}
+if(c > 0){
+  c = c + 1;
+}
+\end{lstlisting}
+
+O termo {\tt if} é uma palavra reservada e, portanto, faz parte do seu léxico, bem como os símbolos de chaves, parênteses e ponto e vírgula.
+A estrutura -- sintaxe -- pode ser descrita da seguinte forma:
+
+\begin{lstlisting}
+if(<cond.>){
+  <bloco>
+}
+\end{lstlisting}
+
+Para ser mais preciso, precisaríamos descrever a sintaxe de {\tt <cond.>} e de {\tt <bloco>}, mas vamos para por aqui.
+Por fim, a semântica deste comando determina que caso a condição {\tt <cond.>} seja satisfeita, o bloco {\tt <bloco>} será executado.
+
+Alguns cursos de computação oferecem a disciplina {\em Linguagens de Programação} que explora a fundo as opções sintáticas e a semânticas de diversas linguagens.
+Com exceção da já mencionada disciplina de Arquitetura, em todos os demais disciplinas usaremos linguagens de alto nível, ou seja, linguagens que não são interpretadas diretamente pela CPU.
+Algumas linguagens de programação como C, que vocês devem ter contato nas disciplinas de {\em Estrutura de Dados}, possuem o que chamamos de um compilador.
+Alguns cursos de computação oferecem a disciplina de {\em Compiladores} que trata exclusivamente deste tema.
+
+\begin{quote}
+  Um {\em compilador} é um programa que traduz um programa de uma linguagem para outra.
+\end{quote}
+
+No caso do compilador de C, o programa escrito em C é traduzido para uma linguagem a ser diretamente executada pela CPU.
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm,auto,>=latex]
+\node (prog) {Programa};
+\node (exec) at (10,0) {Excecutável};
+\draw[->] (prog) -> node[above]{compilador} (exec);
+\end{tikzpicture}
+\end{center}
+
+Outras linguagens, como o Python, seguem uma abordagem diferente.
+Para executar um programa em Python é preciso de um programa chamado de {\em interpretador} que interpreta suas instruções.
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm,auto,>=latex]
+\node (prog) {Programa};
+\node (int) at (10,0) {Interpretador};
+\draw[<-] (prog) -- node[above]{interpreta} (int);
+\end{tikzpicture}
+\end{center}
+
+
+Nesta disciplina nos centraremos em uma linguagem específica, a última versão do Java.
+Programas escritos na linguagem Java combinam os dois paradigmas descritos acima numa tentativa de reter o melhor dos dois: a eficiência das linguagens compiladas e a capacidade das linguagem script de funcionarem em diferentes arquiteturas.
+Um programa em Java precisa, então, ser compilados para uma linguagem intermediária chamada {\em Bytecode} que, por sua vez, é interpretada por um outro programa também chamado Java\footnote{Eu sei, é um pouco confuso mesmo}.
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm,auto,>=latex]
+\node (prog) {Programa};
+\node (byte) at (5,0) {Bytecode};
+\node (int) at (10,0) {Interpretador};
+\draw[->] (prog) -- node[above]{compila} (byte);
+\draw[<-] (byte) -- node[above]{interpreta} (int);
+\end{tikzpicture}
+\end{center}
+
+Podemos então, finalmente escrever nosso primeiro programa:
+
+\begin{lstlisting}
+// Hello World
+public class Hello{
+  public static void main(String[] args){
+    System.out.println("Ola Mundo");
+  }
+}
+\end{lstlisting}
+
+Aos poucos vamos destrinchando o que significa cada linha deste programa, por ora basta dizer que vamos escrevê-lo em um arquivo chamado {\tt Hello.java} que deve ser compilado para gerar um arquivo Bytecode chamado {\tt Hello.class} que pode finalmente ser interpretado.
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm,auto,>=latex]
+\node (prog) {\tt Hello.java};
+\node (byte) at (5,0) {\tt Hello.class};
+\node (int) at (10,0) {\tt java};
+\draw[->] (prog) -- node[above]{\tt javac} (byte);
+\draw[<-] (byte) -- (int);
+\end{tikzpicture}
+\end{center}
 
 
 % linguagem: léxico, sintaxe e semântica
